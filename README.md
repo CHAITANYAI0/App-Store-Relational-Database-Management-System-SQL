@@ -40,7 +40,8 @@ The ER diagram provides a visual representation of the database structure and re
 - **App and Reviews**: Ratings removed from the App entity to avoid redundancy.
 - **App**: Attribute `age` renamed to `Release_date`.
 
-![ER Diagram](ERD Diagram.png)
+# ER Diagram
+
 <img src="ERD Diagram.png">
 
 ## 📂 Project Files
