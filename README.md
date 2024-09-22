@@ -41,6 +41,7 @@ The ER diagram provides a visual representation of the database structure and re
 - **App**: Attribute `age` renamed to `Release_date`.
 
 ![ER Diagram](ERD Diagram.png)
+<img src="ERD Diagram.png">
 
 ## 📂 Project Files
 ### DDL (Database Object Creation Statements)
