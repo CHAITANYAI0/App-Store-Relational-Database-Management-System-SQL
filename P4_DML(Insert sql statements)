@@ -1,0 +1,286 @@
+Use ASM
+
+INSERT INTO APPLICATION_CATAGORY (Catagory_ID, Catagory_Type, Number_of_Apps)
+VALUES (111,'Game',3),
+ (222,'Education',1),
+ (333,'Entertainment',4),
+ (444,'Shopping',2),
+ (555,'Social',3),
+ (666,'Sports',1),
+ (777,'Music',2),
+ (888,'Food',2),
+ (999,'Beauty',0),
+ (101010,'Fitness',0),
+ (111111,'Booking',0),
+ (121212,'Travel',0);
+
+
+ INSERT into Developer VALUES (1000, 'Google', 'info@gmail.com')
+INSERT into Developer VALUES (1001, 'Meta', 'info@meta.com' )
+INSERT into Developer VALUES (1002 , 'Netflix', 'info@netflix.com')
+INSERT into Developer VALUES (1003, 'Amazon', 'info@amazon.com' )
+INSERT into Developer VALUES (1004 , 'Adobe', 'info@adobe.com')
+INSERT into Developer VALUES (1005, 'MacDonalds', 'info@macd.com' )
+INSERT into Developer VALUES (1006 , 'Zomato', 'info@zomato.com')
+INSERT into Developer VALUES (1007 , 'Rockstar Games', 'info@rockstar.com')
+INSERT into Developer VALUES (1008, 'Byzu', 'info@byzu.com' )
+INSERT into Developer VALUES (1009 , 'ESPN', 'info@espn.com')
+INSERT into Developer VALUES (1010 , 'Apple', 'info@apple.com')
+INSERT into Developer VALUES (1011 , 'MakeMyTrip', 'info@mmt.com')
+
+
+INSERT INTO APP (APP_ID, Developer_ID, Catagory_ID,APP_Name,App_Catagory,APP_Size,APP_Version,APP_Language,APP_Downloads,APP_Released_Date,Device,Has_Subscription)
+VALUES (300,1001,555,'WhatsApp','Social',140.2,2.2,'English',5000,'2015-08-08','Android','No')
+INSERT INTO APP (APP_ID, Developer_ID, Catagory_ID,APP_Name,App_Catagory,APP_Size,APP_Version,APP_Language,APP_Downloads,APP_Released_Date,Device,Has_Subscription)
+VALUES (301,1001,555,'Instagram','Social',263.1,3.2,'French',6500,'2019-01-02','Iphone','No')
+INSERT INTO APP (APP_ID, Developer_ID, Catagory_ID,APP_Name,App_Catagory,APP_Size,APP_Version,APP_Language,APP_Downloads,APP_Released_Date,Device,Has_Subscription)
+VALUES (302,1000,555,'Google Chat','Social',110.8,1.0,'Hindi',500,'2014-08-12','Laptop','Yes')
+INSERT INTO APP (APP_ID, Developer_ID, Catagory_ID,APP_Name,App_Catagory,APP_Size,APP_Version,APP_Language,APP_Downloads,APP_Released_Date,Device,Has_Subscription)
+VALUES (303,1007,111,'GTA 5','Game',1000.7,5.0,'English',25000,'2018-02-14','Laptop','Yes')
+INSERT INTO APP (APP_ID, Developer_ID, Catagory_ID,APP_Name,App_Catagory,APP_Size,APP_Version,APP_Language,APP_Downloads,APP_Released_Date,Device,Has_Subscription)
+VALUES (304,1007,111,'Candy Crush','Game',500.7,4.1,'Japanese',900000,'2015-01-18','Android','No')
+INSERT INTO APP (APP_ID, Developer_ID, Catagory_ID,APP_Name,App_Catagory,APP_Size,APP_Version,APP_Language,APP_Downloads,APP_Released_Date,Device,Has_Subscription)
+VALUES (305,1007,111,'Call of Duty','Game',700.2,1.2,'English',3002,'2020-12-25','Iphone','Yes')
+INSERT INTO APP (APP_ID, Developer_ID, Catagory_ID,APP_Name,App_Catagory,APP_Size,APP_Version,APP_Language,APP_Downloads,APP_Released_Date,Device,Has_Subscription)
+VALUES (306,1008,222,'Learn to Code','Education',999.8,2.5,'English',9999,'2021-11-05','Laptop','Yes')
+INSERT INTO APP (APP_ID, Developer_ID, Catagory_ID,APP_Name,App_Catagory,APP_Size,APP_Version,APP_Language,APP_Downloads,APP_Released_Date,Device,Has_Subscription)
+VALUES (307,1000,222,'YouTube','Entertainment',70.9,1.8,'English',89999,'2013-09-09','Android','No')
+INSERT INTO APP (APP_ID, Developer_ID, Catagory_ID,APP_Name,App_Catagory,APP_Size,APP_Version,APP_Language,APP_Downloads,APP_Released_Date,Device,Has_Subscription)
+VALUES (308,1002,222,'NetFlix','Entertainment',120.3,2.1,'English',7798,'2018-02-02','Laptop','Yes')
+INSERT INTO APP (APP_ID, Developer_ID, Catagory_ID,APP_Name,App_Catagory,APP_Size,APP_Version,APP_Language,APP_Downloads,APP_Released_Date,Device,Has_Subscription)
+VALUES (309,1003,222,'Amazon Prime','Entertainment',190.9,1.1,'English',10010,'2017-07-01','Tablet','Yes')
+INSERT INTO APP (APP_ID, Developer_ID, Catagory_ID,APP_Name,App_Catagory,APP_Size,APP_Version,APP_Language,APP_Downloads,APP_Released_Date,Device,Has_Subscription)
+VALUES (310,1010,222,'Apple Tv','Entertainment',200.6,1.8,'English',8010,'2019-02-07','MacBook','Yes')
+INSERT INTO APP (APP_ID, Developer_ID, Catagory_ID,APP_Name,App_Catagory,APP_Size,APP_Version,APP_Language,APP_Downloads,APP_Released_Date,Device,Has_Subscription)
+VALUES (311,1003,444,'Amazon Shopping','Shopping',100.6,2.9,'English',79999,'2016-01-12','Android','No')
+INSERT INTO APP (APP_ID, Developer_ID, Catagory_ID,APP_Name,App_Catagory,APP_Size,APP_Version,APP_Language,APP_Downloads,APP_Released_Date,Device,Has_Subscription)
+VALUES (312,1003,444,'H&M','Shopping',80.6,1.3,'English',12939,'2015-02-09','Iphone','No')
+INSERT INTO APP (APP_ID, Developer_ID, Catagory_ID,APP_Name,App_Catagory,APP_Size,APP_Version,APP_Language,APP_Downloads,APP_Released_Date,Device,Has_Subscription)
+VALUES (313,1009,666,'ESPN TV','Sports',50.8,1.9,'English',6543,'2019-09-09','Laptop','Yes')
+INSERT INTO APP (APP_ID, Developer_ID, Catagory_ID,APP_Name,App_Catagory,APP_Size,APP_Version,APP_Language,APP_Downloads,APP_Released_Date,Device,Has_Subscription)
+VALUES (314,1000,777,'Youtube Music','Music',90.8,2.3,'English',9876543,'2016-03-01','Android','Yes')
+INSERT INTO APP (APP_ID, Developer_ID, Catagory_ID,APP_Name,App_Catagory,APP_Size,APP_Version,APP_Language,APP_Downloads,APP_Released_Date,Device,Has_Subscription)
+VALUES (315,1010,777,'Apple Music','Music',101.9,1.7,'English',567891,'2017-01-12','Iphone','No')
+INSERT INTO APP (APP_ID, Developer_ID, Catagory_ID,APP_Name,App_Catagory,APP_Size,APP_Version,APP_Language,APP_Downloads,APP_Released_Date,Device,Has_Subscription)
+VALUES (316,1006,888,'Zomato Foods','Food',40.7,2.1,'Hindi',987654321,'2017-02-09','Android','No')
+INSERT INTO APP (APP_ID, Developer_ID, Catagory_ID,APP_Name,App_Catagory,APP_Size,APP_Version,APP_Language,APP_Downloads,APP_Released_Date,Device,Has_Subscription)
+VALUES (317,1005,888,'McDonalds Go','Food',60.2,1.2,'Portugese',67897,'2019-02-12','Iphone','No')
+INSERT INTO APP (APP_ID, Developer_ID, Catagory_ID,APP_Name,App_Catagory,APP_Size,APP_Version,APP_Language,APP_Downloads,APP_Released_Date,Device,Has_Subscription)
+VALUES (318,1011,121212,'MakeMyTrip','Travel',60.2,1.2,'Portugese',67897,'2020-02-11','Iphone','YES')
+
+
+INSERT into LICENSE Values (2000, 1000, 'Business License', 'Include warranties' )
+INSERT into LICENSE Values (2001, 1001, 'Social License', 'Include Delivery terms' )
+INSERT into LICENSE Values (2002, 1002, 'Entertainment License', 'Include copyright or trademark' )
+INSERT into LICENSE Values (2003, 1003, 'Shopping License', 'Include warranties' )
+INSERT into LICENSE Values (2004, 1004, 'Document License', 'Include Delivery terms' )
+INSERT into LICENSE Values (2005, 1005, 'Food License', 'Include copyright or trademark' )
+INSERT into LICENSE Values (2006, 1006, 'Food License', 'Include warranties' )
+INSERT into LICENSE Values (2007, 1007, 'Games License', 'Include Delivery terms' )
+INSERT into LICENSE Values (2008, 1008, 'Education License', 'Include copyright or trademark' )
+INSERT into LICENSE Values (2009, 1009, 'Sports License', 'Include warranties' )
+INSERT into LICENSE Values (2010, 1010, 'Business License', 'Include Delivery terms' )
+
+
+Insert into USER_INFORMATION (User_ID, [User_Name], User_Email, Street_Name, Apartment_No, ZipCode, [State])
+Values
+       (100, 'Vivek', 'hanagoji@gmail.com', 'Westland Ave', 34, 02115, 'MA'),
+       (101, 'Satyam', 'satyam@gmail.com', 'Beacon', 25, 02116, 'CA'),
+       (102, 'Anupam', 'anupam@yahoo.com', 'Santio', 50, 03110, 'NY'),
+       (103, 'Shreya', 'shreya@hotmail.com', 'Westland', 55, 02112, 'MA'),
+       (104, 'Prathamesh', 'wali@gmail.com', 'Raleigh', 90, 412105, 'NC'),
+       (105, 'Chaitanya', 'sushmit@gmail.com', 'Park Ave', 23, 02890, 'NY'),
+       (106, 'Shivani', 'shivani@gmail.com', 'Roxbury', 49, 02121, 'PA'),
+       (107, 'Parvathi', 'parvathi@gmail.com', 'Logan', 25, 84322, 'UT'),
+       (108, 'Talele', 'talele@gmail.com', 'Hoboken', 65, 07030, 'NJ'),
+       (109, 'Anuja', 'anuja@gmail.com', 'Harrison', 45, 60607, 'IL');
+
+
+Insert into USER_PROFILE (Profile_ID, User_ID, Profile_Name, Create_Date, Create_Time, Last_Modified_Date, Last_Modified_TimeDate)
+Values
+        (200, 100, 'Vicky','08/28/2017', '13:30', '09/30/2022', '14:50' ),
+        (201, 100, 'Hango','08/28/2020', '08:34', '06/14/2022', '12:25:06' ),
+        (202, 101, 'Satlya','11/25/2019', '10:30', '03/13/2021', '09:50:23' ),
+        (203, 102, 'Hacker404','06/19/2016', '07:23', '07/06/2022', '02:45:23' ),
+        (204, 103, 'Ricky','02/26/2020', '02:19', '01/17/2021', '11:19:06' ),
+        (205, 104, 'ThePolice','06/17/2020', '12:30', '05/31/2022', '12:55:34' ),
+        (206, 105, 'Sushmit','02/25/2021', '16:30', '04/21/2022', '19:23:12' ),
+        (207, 105, 'Spiderman','05/23/2019', '13:56', '08/10/2020', '06:20:14' ),
+        (208, 106, 'Bihar','07/16/2019', '03:39', '03/17/2020', '03:50:09' ),
+        (209, 107 , 'Parvathy','09/19/2021', '19:34', '02/12/2022', '22:50:23' ),
+        (210, 108,'Orbiculos','08/07/2022','15:32','10/07/2022','22:50:23'),
+        (211, 109,'Nayak','12/12/2018','11:23','12/04/2019','10:45:12'),
+        (212, 103,'Messi','10/09/2017','18:56','03/05/2020','17:08:45'),
+        (213, 107,'Ronaldo','09/07/2022','16:35','12/11/2022','18:56:32');
+
+-- do not insert data into Card_Details using below code, please use the stored procedure UserCardNumEncryption to insert data.
+
+INSERT into CARD_DETAILS (Card_Number, Profile_ID, Card_CVV, Name_On_Card)
+VALUES
+       (ENCRYPTBYKEY(KEY_GUID('CardNumProtector'), '2343789867567878'), 200, 897, 'Vivek Hanagoji' ),
+       (ENCRYPTBYKEY(KEY_GUID('CardNumProtector'), '3453754667561243'), 201, 777, 'Vivek Hanagoji' ),
+       (ENCRYPTBYKEY(KEY_GUID('CardNumProtector'), '7893192867562865'), 202, 253, 'Satyam Jagtap' ),
+       (ENCRYPTBYKEY(KEY_GUID('CardNumProtector'), '3056789867534718'), 203, 490, 'Anupam Aditya' ),
+       (ENCRYPTBYKEY(KEY_GUID('CardNumProtector'), '1076398623092778'), 204, 420, 'Shreya Baliga' ),
+       (ENCRYPTBYKEY(KEY_GUID('CardNumProtector'), '5098234127843789'), 205, 510, 'Prathamesh Wali' ),
+       (ENCRYPTBYKEY(KEY_GUID('CardNumProtector'), '1230459103846513'), 206, 333, 'Chaitanya Inamdar' ),
+       (ENCRYPTBYKEY(KEY_GUID('CardNumProtector'), '5708416186479514'), 207, 327, 'Chaitanya Inamdar' ),
+       (ENCRYPTBYKEY(KEY_GUID('CardNumProtector'), '8123450871347576'), 208, 151, 'Shivani Shahu' ),
+       (ENCRYPTBYKEY(KEY_GUID('CardNumProtector'), '3409813497598784'), 209, 134, 'Parvathi' );
+
+Insert into ADVERTISEMENT (Advertisement_ID,APP_ID,Advertisement_Details,Advertisement_Cost)
+VALUES
+      (400,302,'Google Product Advertisements',10000),
+      (401,301,'Content Feature Advertisements',5000),
+      (402,304,'Miscellaneous Advertisements',2000),
+      (403,307,'Video Promotion Advertisements',150000),
+      (404,309,'TV Shows Promotion Advertisements',350000),
+      (405,310,'Apple Channel Promotion Advertisements',450000),
+      (406,311,'Amazon Product Feature Advertisements ',550000),
+      (407,313,'Sports Channel Promotion Advertisements',200000),
+      (408,314,'Artist Fearure Advertisements',300000),
+      (409,315,'Album Feature Advertisements',400000),
+      (410,316,'Restaurants Promotion Advertisements',315000),
+      (411,317,'McDonalds Product Advertisements',125000);
+
+
+select * from REVIEWS
+INSERT into REVIEWS (App_ID, Profile_ID, Review_Date, Ratings)
+VALUES
+      (300, 200, '11/15/2022', 4),
+      (300, 202, '09/14/2022', 4),
+      (300, 209, '06/22/2021', 3),
+      (301, 203, '10/22/2022', 5),
+      (301, 205, '07/18/2021', 4),
+      (301, 207, '04/10/2021', 5),
+      (302, 201, '11/11/2022', 3),
+      (302, 202, '09/19/2022', 5),
+      (302, 206, '05/15/2022', 5),
+      (303, 205, '05/10/2022', 5),
+      (303, 207, '03/11/2022', 4),
+      (303, 208, '12/15/2021', 3),
+      (304, 204, '10/15/2022', 1),
+      (304, 200, '08/16/2022', 3),
+      (304, 201, '06/01/2022', 3),
+      (304, 202, '11/05/2021', 4),
+      (305, 203, '05/20/2022', 2),
+      (305, 207, '10/25/2021', 3),
+      (305, 209, '07/23/2021', 5),
+      (306, 201, '11/19/2022', 4),
+      (306, 205, '07/04/2022', 2),
+      (306, 206, '03/06/2022', 5),
+      (307, 200, '09/22/2022', 4),
+      (307, 201, '04/28/2022', 5),
+      (307, 205, '12/29/2021', 4),
+      (307, 208, '11/09/2021', 5),
+      (308, 209, '02/05/2022', 3),
+      (308, 202, '01/31/2022', 5),
+      (309, 200, '10/18/2022', 5),
+      (309, 202, '11/12/2021', 4),
+      (310, 206, '08/13/2022', 5),
+      (311, 203, '09/30/2022', 3),
+      (311, 200, '05/21/2022', 4),
+      (311, 206, '03/15/2022', 3),
+      (312, 209, '10/08/2022', 5),
+      (312, 200, '09/18/2021', 4),
+      (313, 202, '09/17/2022', 1),
+      (313, 203, '09/15/2022', 2),
+      (313, 208, '03/27/2022', 4),
+      (314, 200, '02/20/2022', 5),
+      (314, 209, '01/13/2022', 5),
+      (315, 208, '10/31/2022', 5),
+      (315, 204, '09/16/2022', 4),
+      (315, 203, '11/14/2021', 4),
+      (316, 201, '08/12/2022', 5),
+      (316, 208, '06/22/2022', 4),
+      (317, 201, '11/07/2022', 3),
+      (317, 204, '11/02/2022', 5),
+      (317, 207, '10/09/2022', 4),
+      (313, 210, '09/09/2022', 2),
+      (315, 211, '12/12/2021', 3),
+      (315, 212, '08/02/2021', 1),
+      (308, 210, '01/02/2022', 1),
+      (309, 210, '03/08/2021', 4);
+
+
+INSERT into SUBSCRIPTION (APP_ID, Profile_ID, Subscription_ID, Subscription_Type, Subscription_Amount, Subscription_Start_Date, Subscription_End_Date)
+VALUES
+       (303,200, 5000, 'Monthly', 49, '05/01/2019', '06/01/2019'),
+       (304,203, 5001, 'Monthly', 79, '08/31/2021', '09/30/2021'),
+       (305,206, 5002, 'Yearly', 149, '04/01/2019', '03/31/2020'),
+       (306,202, 5003, 'Yearly', 249, '09/01/2022', '08/31/2023'),
+       (307,209, 5004, 'Monthly', 30, '07/01/2022', '08/01/2022'),
+       (308,207, 5005, 'Yearly', 99, '05/01/2019', '04/30/2020'),
+       (309,207, 5006, 'Monthly', 40, '03/01/2020', '04/30/2020'),
+       (310,208, 5007, 'Yearly', 119, '11/01/2018', '10/31/2019'),
+       (311,205, 5008, 'Monthly', 9, '02/01/2020', '03/01/2020'),
+       (314,204, 5009, 'Yearly', 69, '05/01/2018', '04/30/2019'),
+       (303,210,5010,'Monthly',49,'06/01/2019','07/01/2019'),
+       (304,211,5011,'Monthly',79,'09/04/2020','10/04/2020'),
+       (305,210,5012,'Yearly',149,'10/04/2020','10/04/2021'),
+       (314,210,5013,'Monthly',30,'03/04/2021','04/05/2021'),
+       (313,203,5014,'Yearly',99,'02/05/2021','02/05/2022'),
+       (310,212,5015,'Yearly',119,'02/05/2021','02/05/2022'),
+       (304,212,5016,'Monthly',79,'02/05/2021','02/05/2022'),
+       (303,212,5017,'Yearly',90,'01/06/2020','01/06/2021');
+
+
+
+INSERT into INSTALLED_APPS (APP_ID, Profile_ID, Terms_And_Conditions, Update_Available, Date_of_Installation)
+VALUES
+      (301, 203,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.', 'Yes','10/22/2022'),
+      (301, 205,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.','Yes' ,'07/18/2021'),
+      (301, 207,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.','Yes' ,'04/10/2021'),
+      (302, 201,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.','No' ,'11/11/2022'),
+      (302, 202,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.','Yes' ,'09/19/2022'),
+      (302, 206,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.','No' ,'05/15/2022'),
+      (303, 205,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.','Yes' ,'05/10/2022'),
+      (303, 207,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.','Yes' ,'03/11/2022'),
+      (303, 208,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.','No' ,'12/15/2021'),
+      (304, 204,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.','No' ,'10/15/2022'),
+      (304, 200,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.','Yes','08/16/2022'),
+      (304, 201,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.','No' ,'06/01/2022'),
+      (304, 202,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.', 'Yes','11/05/2021'),
+      (305, 203,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.','Yes' ,'05/20/2022'),
+      (305, 207,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.','Yes' ,'10/25/2021'),
+      (305, 209,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.','No' ,'07/23/2021'),
+      (306, 201,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.','No' ,'11/19/2022'),
+      (306, 205, 'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.','Yes','07/04/2022'),
+      (306, 206, 'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.','No','03/06/2022'),
+      (307, 200,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.','Yes' ,'09/22/2022'),
+      (307, 201, 'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.','No','04/28/2022'),
+      (307, 205,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.','Yes' ,'12/29/2021'),
+      (307, 208,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.','No' ,'11/09/2021'),
+      (308, 209,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.','No' ,'02/05/2022'),
+      (308, 202,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.','Yes','01/31/2022'),
+      (309, 200,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.','Yes' ,'10/18/2022'),
+      (309, 202,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.','Yes','11/12/2021'),
+      (310, 206,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.','No' ,'08/13/2022'),
+      (311, 203,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.','Yes' ,'09/30/2022'),
+      (311, 200,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.','Yes' ,'05/21/2022'),
+      (311, 206,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.','No' ,'03/15/2022'),
+      (312, 209,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.','No' ,'10/08/2022'),
+      (312, 200,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.','Yes' ,'09/18/2021'),
+      (313, 202,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.', 'Yes','09/17/2022'),
+      (313, 203,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.','Yes' ,'09/15/2022'),
+      (313, 208,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.','No' ,'03/27/2022'),
+      (314, 200,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.','Yes' ,'02/20/2022'),
+      (314, 209,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.','No' ,'01/13/2022'),
+      (315, 208,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.', 'No','10/31/2022'),
+      (315, 204,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.','No' ,'09/16/2022'),
+      (315, 203,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.','Yes' ,'11/14/2021'),
+      (316, 201,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.','No' ,'08/12/2022'),
+      (316, 208,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.','No' ,'06/22/2022'),
+      (317, 201,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.','No' ,'11/07/2022'),
+      (317, 204,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.','No' ,'11/02/2022'),
+      (317, 207,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.','Yes' ,'10/09/2022'),
+      (313, 210,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.','No' ,'09/09/2022'),
+      (315, 211,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.', 'No','12/12/2021'),
+      (315, 212,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.' ,'No','08/02/2021'),
+      (308, 210,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.','No' ,'01/02/2022'),
+      (309, 210,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.', 'No','03/08/2021'),
+     (300, 200,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.','Yes' ,'11/15/2022'),
+     (300, 202,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.','Yes' ,'09/14/2022'),
+     (300, 209,'You may use App to browse, locate, view, stream, or download Content for your mobile, computer, tv, watch, or other supported device ("Device").To use App Store App you will need a Device that meets the system and compatibility requirements for the relevant Content, working Internet access, and compatible software.', 'No','06/22/2021');
+
+

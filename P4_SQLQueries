@@ -1,0 +1,476 @@
+
+--Create Keys for encryption decryption on Credit Card Number
+
+Create Master Key Encryption by PASSWORD = 'Th!sHereIs7ust$@nd0m5tu33'
+
+CREATE CERTIFICATE Certificate_CardSecure WITH SUBJECT = 'Protect my Card details';
+
+SELECT name CertName,
+   certificate_id CertID,
+   pvt_key_encryption_type_desc EncryptType,
+   issuer_name Issuer
+FROM sys.certificates;
+
+Create Symmetric Key CardNumProtector
+With Algorithm = AES_256
+Encryption by Certificate Certificate_CardSecure;
+
+SELECT name KeyName,
+   symmetric_key_id KeyID,
+   key_length KeyLength,
+   algorithm_desc KeyAlgorithm
+FROM sys.symmetric_keys;
+
+
+--Stored Procedure for encryption of card numbers
+GO
+Alter PROCEDURE UserCardNumEncryption @CardNum VARCHAR(30), @Profile_ID INT, @Card_CVV INT, @Name_on_Card VARCHAR(30)
+AS
+BEGIN
+OPEN SYMMETRIC KEY CardNumProtector
+       DECRYPTION BY CERTIFICATE Certificate_CardSecure;
+ 
+Insert into Card_Details (Card_Number, Profile_ID, Card_CVV, Name_On_Card) VALUES
+       ((ENCRYPTBYKEY(KEY_GUID('CardNumProtector'), @CardNum)), @Profile_ID, @Card_CVV, @Name_on_Card);
+       -- (ENCRYPTBYKEY(KEY_GUID('CardNumProtector'), '3453754667561243'), 201, 777, 'Vivek Hanagoji' );
+ 
+Close symmetric key CardNumProtector
+ 
+-- PRINT ('Card Details Inserted');
+     
+END
+
+
+EXEC UserCardNumEncryption '2343789867567878', 200, 897, 'Vivek Hanagoji'
+EXEC UserCardNumEncryption '3453754667561243', 201, 777, 'Vivek Hanagoji'
+EXEC UserCardNumEncryption '7893192867562865', 202, 253, 'Satyam Jagtap'
+EXEC UserCardNumEncryption '3056789867534718', 203, 490, 'Anupam Aditya'
+EXEC UserCardNumEncryption '3453754667561243', 204, 420, 'Shreya Baliga'
+EXEC UserCardNumEncryption '3453754667561243', 205, 510, 'Prathamesh Wali'
+EXEC UserCardNumEncryption '3453754667561243', 206, 333, 'Chaitanya Inamdar'
+EXEC UserCardNumEncryption '3453754667561243', 207, 327, 'Chaitanya Inamdar'
+EXEC UserCardNumEncryption '3453754667561243', 208, 151, 'Shivani Shahu'
+EXEC UserCardNumEncryption '3453754667561243', 209, 134, 'Parvathi'
+EXEC UserCardNumEncryption '3453754623523443', 209, 645, 'Parvathi'
+
+
+--Stored Procedure for decryption of card numbers
+
+Go
+select * from Card_Details
+GO
+Create PROCEDURE UserCardNumDecryption @Name_on_Card VARCHAR(30)
+AS
+BEGIN
+    OPEN SYMMETRIC KEY CardNumProtector
+       DECRYPTION BY CERTIFICATE Certificate_CardSecure;
+ 
+       SELECT *,
+   CONVERT(varchar, DecryptByKey(Card_Number) )  AS Decrypted_Card_Number  
+   FROM dbo.Card_Details
+   where Name_on_Card = @Name_on_Card;
+ 
+       Close symmetric key CardNumProtector;
+ 
+End
+
+EXEC UserCardNumDecryption 'Parvathi'
+
+
+--Stored Procedure for getting User Catalogue details by providing Profile ID
+
+GO
+CREATE PROCEDURE GetUserCatalogue @Profile_ID INT
+AS
+BEGIN
+
+SELECT a.Profile_ID,b.APP_ID,b.APP_Name,a.Update_Available,a.Date_of_Installation FROM
+(SELECT * FROM installed_Apps)a
+INNER JOIN
+(SELECT * FROM App)b on a.APP_ID = b.APP_ID  and a.Profile_ID = @Profile_ID order by a.Profile_ID
+ 
+END
+
+EXEC GetUserCatalogue 202
+
+--stored procedure for getting subscription details by providing userName:
+
+GO
+Create proc getSubscriptionDetails @UserName VARCHAR (30)
+AS
+BEGIN
+      select u.USER_NAME,p.profile_Name, a.App_Name, s.subscription_Type, '$' + Cast(s.Subscription_Amount as Varchar(30)) as Subscription_Amount, s.Subscription_Start_Date, s.Subscription_End_Date
+      from User_Profile p left join User_Information u on u.user_ID = p.User_ID
+      join subscription s on p.profile_ID = s.profile_ID join App a on a.App_ID = s.App_ID
+      where u.USER_NAME = @UserName
+END
+EXEC getSubscriptionDetails 'Vivek'
+
+
+
+-- View to generate Developers report based on the total spend on advertisements 
+Go
+CREATE VIEW  OrganizationReport
+AS
+SELECT x.Organization_Name,sum(x.APP_Downloads) as Total_Downloads,count(x.Catagory_Type) AS Number_of_Apps,'$'+ cast(sum(z.Advertisement_Cost) AS varchar(50)) as Total_Spend_on_Ads from
+(select c.APP_ID,Organization_Name,c.APP_Downloads,d.Catagory_Type from
+(select * from APPLICATION_CATAGORY)d
+inner join
+(select a.APP_ID,b.Developer_ID,b.Organization_Name,a.Catagory_ID,a.APP_Downloads from
+(select * from APP)a
+inner JOIN
+(select * from DEVELOPER)b
+on a.Developer_ID = b.Developer_ID)c on d.Catagory_ID = c.Catagory_ID)x
+inner JOIN
+(select * from ADVERTISEMENT)z on x.APP_ID = z.APP_ID group by x.Organization_Name
+
+--- Run generate Developers report report query
+
+GO
+select * from OrganizationReport ORDER by Total_Downloads DESC
+
+--View to generate App Performance report based on the Reviews given by users
+
+GO
+
+CREATE VIEW AppPerformance
+AS
+select b.APP_ID,a.APP_Name,count(b.Ratings) as total_Ratings,cast(sum(b.Ratings)/count(b.Profile_ID) as varchar) + '/5'  as Average_Ratings ,
+CASE
+    WHEN sum(b.Ratings)/count(b.Profile_ID) <= 2 Then 'Poor'
+    WHEN sum(b.Ratings)/count(b.Profile_ID) =3  THEN 'Average'
+    WHEN sum(b.Ratings)/count(b.Profile_ID) =4  THEN 'Good'
+    ELSE 'Excellent' 
+
+END AS Performance
+from
+(select * from APP)a
+inner JOIN
+(select * from REVIEWS)b on a.APP_ID = b.APP_ID group by b.APP_ID,a.APP_Name;
+
+--- Run generate App Performance report query
+GO
+select * from AppPerformance ORDER by Average_Ratings DESC
+
+--View to generate Profile Spend report based on the Total subscriptions taken by users
+Go
+CREATE VIEW ProfileSpendReprt
+AS
+Select a.Profile_ID,b.Profile_Name,count(a.APP_ID) as Number_of_Downloaded_Apps,'$' + cast(sum(a.Subscription_Amount) as varchar) as Total_Spend_on_Apps from 
+(select * from SUBSCRIPTION)a
+inner JOIN
+(select * from USER_PROFILE)b on a.Profile_ID = b.Profile_ID GROUP BY a.Profile_ID,b.Profile_Name
+
+--- Run generate Profile Spend report report query
+GO
+SELECT * from ProfileSpendReprt ORDER by Number_of_Downloaded_Apps DESC
+
+--trigger to 
+
+CREATE TABLE [dbo].[AppAudit](
+    [AppAuditID] int not null primary key  identity(1,1),
+    [App_ID] [char](4) NOT NULL,
+    [App_Name] [varchar](100) NOT NULL,
+[App_Catagory] [varchar](100) NOT NULL,
+[Old_Name] [varchar](100),
+[New_Name] [varchar](100) NULL,
+[Action] char(10),
+[ActionDate] datetime
+)
+
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+--Trigger on App Table for Update on AppName
+
+CREATE TRIGGER APPCHANGE
+   ON  dbo.APP
+  FOR UPDATE
+AS 
+BEGIN
+declare @action char(10)
+IF UPDATE(APP_NAME)
+SET @action = 'Update'
+INSERT INTO  [AppAudit] ( 
+[App_ID] ,
+[App_Name] ,
+[App_Catagory],
+[Old_Name],
+[New_Name],
+[Action],
+[ActionDate] )
+  SELECT d.App_ID,
+  d.APP_Name,
+  d.App_Catagory,
+  d.APP_Name,
+  i.APP_Name,
+  @action,
+  GETDATE()
+   FROM DELETED d join INSERTED i on d.App_ID = i.App_ID
+END
+
+
+
+Update APP SET App_Name = 'WhatsApp' WHERE APP_ID = '300' 
+select * from [dbo].[AppAudit]
+Select * from App
+
+SET STATISTICS TIME Off
+SET STATISTICS IO Off
+GO
+
+--Trigger on App Table for DELETE
+GO
+ALTER TRIGGER App_Dlt
+   ON  dbo.APP
+  FOR DELETE
+AS 
+BEGIN
+ROLLBACK
+PRINT '#############################################'
+PRINT '!!!!!!Deleting an App is Prohibited!!!!!'
+PRINT '#############################################'
+
+END 
+GO
+
+delete from App where APP_ID = '318'
+
+--Trigger for generating logs on card_details:
+
+Create table My_CardDetails_Audit_tbl
+(
+    Card_Number Varchar(30) not null,
+    Profile_ID INT not null,
+    Card_CVV INT  not null check (len(Card_CVV) = 3),
+    Name_On_Card VARCHAR (50) not null,
+    DeletedDateTime DATETIME,
+    CONSTRAINT My_CardDetails_Audit_tbl__pk Primary key (Card_Number)
+);
+
+Drop table  My_CardDetails_Audit_tbl
+GO
+Alter trigger DeleteLogs
+on Card_Details
+After DELETE
+AS
+BEGIN
+       Declare @Card_Number varchar(30),
+               @Profile_ID int,
+               @Card_cvv int,
+               @Name_on_Card varchar(50);
+ 
+               select @Card_Number = d.Card_Number from deleted d;
+               select @Profile_ID = d.Profile_ID from deleted d;
+               select @Card_cvv = d.Card_cvv from deleted d;
+               select @Name_on_Card = d.Name_On_Card from deleted d;
+ 
+       Insert into My_CardDetails_Audit_tbl (Card_Number, Profile_ID, Card_CVV, Name_On_Card, DeletedDateTime)
+       values (@Card_Number,@Profile_ID,@Card_cvv, @Name_on_Card, GETDATE())
+ 
+ 
+ 
+End
+select * from card_details
+select * from My_CardDetails_Audit_tbl
+DELETE from Card_Details where Profile_ID = 200
+
+--Computed Column UDF
+
+Go
+Create FUNCTION AvgNumberOfDownloads( @App_catagory VARCHAR(30))
+RETURNS Table As
+ 
+    Return
+       SELECT (sum(a.App_Downloads)/ac.Number_of_Apps) As AverageNumberOfDownloads , a.App_Catagory 
+            from App a left join APPLICATION_CATAGORY ac on a.Catagory_ID = ac.Catagory_ID
+            WHERE a.App_Catagory = @App_catagory
+            group by a.App_Catagory, ac.Number_of_Apps ;
+       GO
+
+GO
+select * from AvgNumberOfDownloads('Game');
+Select * from APPLICATION_CATAGORY
+Select * from APP
+
+--normal UDF
+--1
+GO 
+Create FUNCTION GetUserTermsandConditions
+(
+   @App_Name VARCHAR(30)
+)
+RETURNS Table As
+ 
+    Return
+       select p.profile_Name,u.USER_NAME , a.App_Name, i.Terms_And_Conditions
+       from USER_INFORMATION u left join  USER_PROFILE p on u.user_ID = p.User_ID
+       left join INSTALLED_APPS i on p.profile_ID = i.profile_ID
+       left join App a on a.app_ID = i.App_ID
+       where a.App_Name = @App_Name;
+       GO
+ 
+-- Execution of User Defined Function by passing app name
+select * from GetUserTermsandConditions ('WhatsApp');
+
+
+-- 2
+GO
+
+alter FUNCTION GetNoOfDownloads
+(
+   @App_Name VARCHAR(30)
+)
+RETURNS INT As
+BEGIN
+   DECLARE @APP_Downloads INT
+   select @APP_Downloads = a.App_Downloads from App a where a.APP_Name = @App_Name
+   RETURN @APP_Downloads;
+END
+GO
+
+select dbo.GetNoOfDownloads ('Instagram') AS Downloads
+
+
+-- Non-Clustered Indexes
+
+select * into  dbo.APP_TEST FROM
+ dbo.app
+
+ create CLUSTERED index idx_app_name
+on dbo.APP_TEST (App_Name)
+go
+
+drop index nix_App_Name on APP_TEST
+
+create NONCLUSTERED index nix_App_Name
+on dbo.APP_TEST (APP_NAME ASC)
+go
+
+create NONCLUSTERED index nix_App_Name
+on dbo.APP (APP_NAME ASC)
+go
+
+sp_helpindex 'dbo.APP_TEST'
+
+DBCC IND('App_Store_Management','dbo.APP_TEST',0)
+DBCC IND('App_Store_Management','dbo.APP_TEST',2)
+
+DBCC TRACEON (3604)
+GO
+
+DBCC PAGE (App_Store_Management,1,520,3)
+GO
+
+
+select * from APP_TEST
+
+
+--------------------
+
+select * from UserInformation_TEST
+select * from User_information
+
+select * into  dbo.UserInformation_TEST FROM
+ dbo.User_information
+
+Create CLUSTERED index idx_User_Name
+on dbo.UserInformation_TEST (USER_NAME)
+go
+
+drop index idx_User_Id on UserInformation_TEST
+
+create NONCLUSTERED index ndx_User_Name
+on dbo.UserInformation_TEST (User_Name ASC)
+go
+
+create NONCLUSTERED index ndx_User_Name
+on dbo.UserInformation (User_Name ASC)
+go
+
+sp_helpindex 'dbo.UserInformation_TEST'
+DBCC IND('App_Store_Management','dbo.UserInformation_TEST',0)
+DBCC IND('App_Store_Management','dbo.UserInformation_TEST',2)
+
+
+
+DBCC TRACEON (3604)
+GO
+
+DBCC PAGE (App_Store_Management,1,480,3)
+GO
+
+-------------------------
+
+select * from APPLICATION_CATAGORY
+select * from APPLICATION_CATAGORY_TEST
+
+select * into  dbo.APPLICATION_CATAGORY_TEST FROM
+ dbo.APPLICATION_CATAGORY
+
+create CLUSTERED index idx_NoOfApp
+on dbo.APPLICATION_CATAGORY_TEST (Number_of_Apps)
+go
+
+create NONCLUSTERED index nix_No_Of_Apps
+on dbo.APPLICATION_CATAGORY_TEST (Number_of_Apps DESC)
+go
+
+create NONCLUSTERED index nix_No_Of_Apps
+on dbo.APPLICATION_CATAGORY (Number_of_Apps DESC)
+go
+
+
+sp_helpindex 'dbo.APPLICATION_CATAGORY_TEST'
+
+DBCC IND('App_Store_Management','dbo.APPLICATION_CATAGORY_TEST',0)
+DBCC IND('App_Store_Management','dbo.APPLICATION_CATAGORY_TEST',2)
+
+
+
+DBCC TRACEON (3604)
+GO
+
+DBCC PAGE (App_Store_Management,1,536,3)
+GO
+
+------------------------------
+
+
+select * from Advertisement
+select * from Advertisement_TEST
+
+select * into  dbo.Advertisement_TEST FROM
+ dbo.Advertisement
+
+create CLUSTERED index idx_Advertisement_Cost
+on dbo.Advertisement_TEST (Advertisement_Cost)
+go
+
+DROP INDEX idx_Advertisement_ID ON Advertisement_TEST
+
+create NONCLUSTERED index nix_Advertisement_Cost
+on dbo.Advertisement_TEST (Advertisement_Cost DESC)
+go
+
+create NONCLUSTERED index nix_Advertisement_Cost
+on dbo.Advertisement (Advertisement_Cost DESC)
+go
+
+
+sp_helpindex 'dbo.Advertisement_TEST'
+
+DBCC IND('App_Store_Management','dbo.Advertisement_TEST',0)
+DBCC IND('App_Store_Management','dbo.Advertisement_TEST',2)
+
+
+
+DBCC TRACEON (3604)
+GO
+
+DBCC PAGE (App_Store_Management,1,552,3)
+GO
+

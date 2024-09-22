@@ -1,0 +1,151 @@
+create DATABASE ASM
+
+GO
+
+CREATE TABLE DEVELOPER
+(
+Developer_ID INT not null,
+Developer_Name VARCHAR (30) not null,
+Organization_Name VARCHAR (30) not null,
+constraint DEVELOPER_PK primary key (Developer_ID)
+);
+
+CREATE TABLE APPLICATION_CATAGORY
+(
+Catagory_ID INT not null,
+Catagory_Type VARCHAR (30) CONSTRAINT Catagory_Type_ck  
+CHECK (Catagory_Type in ('Game','Education','Entertainment','Shopping','Social','Sports','Music','Food','Beauty','Fitness','Booking','Travel')) not null,
+Number_of_Apps INT not null,
+constraint APPLICATION_CATAGORY_PK primary key (Catagory_ID)
+);
+
+
+Go
+CREATE TABLE APP
+(
+APP_ID INT not null,
+Developer_ID INT not null,
+Catagory_ID INT not null,
+App_Name Varchar(256) not null,
+App_Catagory VARCHAR (30) CONSTRAINT App_Catagory_ck  
+CHECK (App_Catagory in ('Game','Education','Entertainment','Shopping','Social','Sports','Music','Food','Travel')) not null,
+APP_Size Decimal(10,2) not null,
+APP_Version Decimal (2,1) not null,
+APP_Language VARCHAR (30) CONSTRAINT APP_Language_ck  
+CHECK (APP_Language in ('English','Hindi','Spanish','French','Portugese','Japanese','Chinese')) not null,
+APP_Downloads INT not null,
+APP_Released_Date DATE not null,
+Device VARCHAR (30) CONSTRAINT Device_ck  
+CHECK (Device in ('Android','IPhone','Laptop','MacBook','IPad','Tablet')) not null,
+Has_Subscription VARCHAR (10) CONSTRAINT Has_Subscription_ck  
+CHECK (Has_Subscription in ('Yes','No')) not null,
+constraint APP_PK primary key (APP_ID),
+constraint Developer_ID_FK foreign key (Developer_ID) references DEVELOPER(Developer_ID),
+constraint Catagory_ID_FK foreign key (Catagory_ID) references APPLICATION_CATAGORY(Catagory_ID)
+)
+
+-- ALTER Table App Add CONSTRAINT App_Catagory_ck CHECK (App_Catagory in ('Game','Education','Entertainment','Shopping','Social','Sports','Music','Food','Travel'));
+
+GO
+CREATE TABLE LICENSE
+(
+License_ID INT not null,
+Developer_ID INT not null,
+Agreement_Information VARCHAR (30) not null,
+[Description] VARCHAR (30) not null,
+constraint LICENSE_PK primary key (License_ID),
+constraint Developer_ID_Lic_FK foreign key (Developer_ID) references DEVELOPER(Developer_ID),
+
+);
+
+CREATE TABLE ADVERTISEMENT 
+(
+Advertisement_ID INT not null,
+APP_ID INT not null,
+Advertisement_Details VARCHAR (50) not null,
+Advertisement_Cost MONEY not null,
+constraint Advertisement_PK primary key (Advertisement_ID),
+constraint APP_ID_FK foreign key (APP_ID) references APP(APP_ID),
+);
+
+
+CREATE TABLE USER_INFORMATION 
+(
+User_ID INT not null,
+User_Name VARCHAR (50) not null,
+User_Email VARCHAR (50) not null CHECK (User_Email like '%_@__%.__%'),
+Street_Name VARCHAR (50) not null,
+Apartment_No INT not null,
+ZipCode INT not null,
+[State] VARCHAR (20) not null,
+constraint USER_INFORMATION_PK primary key (User_ID)
+);
+
+CREATE TABLE USER_PROFILE 
+(
+Profile_ID INT not null,
+User_ID INT not null,
+Profile_Name VARCHAR (50) not null,
+Create_Date DATE,
+Create_Time TIME,
+Last_Modified_Date DATE Default GETDATE(),
+Last_Modified_TimeDate TIME Default GETDATE(),
+constraint USER_PROFILE_PK primary key (Profile_ID),
+constraint USER_ID_FK foreign key (User_ID) references USER_INFORMATION(User_ID),
+);
+
+CREATE TABLE CARD_DETAILS 
+(
+Card_Number varchar(100) not null,
+Profile_ID INT not null,
+Card_CVV INT  not null check (len(Card_CVV) = 3),
+Name_On_Card VARCHAR (50) not null,
+constraint CARD_DETAILS_PK primary key (Card_Number),
+constraint Profile_ID_FK foreign key (Profile_ID) references USER_PROFILE(Profile_ID),
+);
+drop table CARD_DETAILS
+
+CREATE TABLE REVIEWS 
+(
+APP_ID INT not null,
+Profile_ID INT not null,
+Review_Date DATE,
+Ratings INT CONSTRAINT Ratings_ck CHECK(Ratings in(1,2,3,4,5)),
+constraint REVIEWS_PK primary key (APP_ID,Profile_ID),
+constraint REVIEWS_FK1 foreign key (APP_ID) references APP(APP_ID),
+constraint REVIEWS_FK2 foreign key (Profile_ID) references USER_PROFILE(Profile_ID),
+);
+
+CREATE TABLE SUBSCRIPTION 
+(
+APP_ID INT not null,
+Profile_ID INT not null,
+Subscription_ID INT not null,
+Subscription_Type VARCHAR (30) CONSTRAINT Subscription_Type_ck  
+CHECK (Subscription_Type in ('Monthly','Yearly')) not null,
+Subscription_Amount INT not null,
+Subscription_Start_Date DATE Not Null,
+Subscription_End_Date DATE not null,
+constraint SUBSCRIPTION_PK primary key (APP_ID,Profile_ID,Subscription_ID),
+constraint SUBSCRIPTION_FK1 foreign key (APP_ID) references APP(APP_ID),
+constraint SUBSCRIPTION_FK2 foreign key (Profile_ID) references USER_PROFILE(Profile_ID),
+);
+
+CREATE TABLE INSTALLED_APPS 
+(
+APP_ID INT not null,
+Profile_ID INT not null,
+Terms_And_Conditions VARCHAR (1000) not null,
+Application_Type VARCHAR (30) CONSTRAINT Application_Type_ck  
+CHECK (Application_Type in ('Game','Education','Entertainment','Shopping','Social','Sports','Music')) not null,
+App_Name Varchar(256) not null,
+Update_Available Varchar(10) CONSTRAINT Update_Available_ck CHECK(Update_Available in ('Yes','No'))  Not Null,
+Date_of_Installation DATE not null,
+constraint INSTALLED_APPS_PK primary key (APP_ID,Profile_ID),
+constraint INSTALLED_APPS_FK1 foreign key (APP_ID) references APP(APP_ID),
+constraint INSTALLED_APPS_FK2 foreign key (Profile_ID) references USER_PROFILE(Profile_ID),
+);
+
+
+
+
